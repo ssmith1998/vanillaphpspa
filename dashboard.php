@@ -42,7 +42,11 @@ $foodData = $stmt->fetchAll();
                         <tr>
                             <td><?php echo $index + 1 ?></td>
                             <td><?php echo $food['foodName'] ?></td>
-                            <td><button class="btn btn-primary editItem" data-id="<?php echo $food['id'] ?>" modal-id="#addNewItemModal">Edit</button><button class="btn btn-danger deleteItem" data-id="<?php echo $food['id'] ?>">Delete</button></td>
+                            <td>
+                                <button class="btn btn-primary editItem" data-id="<?php echo $food['id'] ?>" modal-id="#addNewItemModal">Edit</button>
+                                <button class="btn btn-danger deleteItem" data-id="<?php echo $food['id'] ?>">Delete</button>
+                                <button class="btn btn-primary viewItem" data-id="<?php echo $food['id'] ?>">View</button>
+                            </td>
                         </tr>
                     <?php
                     }

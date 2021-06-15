@@ -118,4 +118,31 @@ jQuery(document).ready(function () {
 
     })
 
+    //view item 
+    jQuery('.viewItem').on('click', function () {
+
+
+        let itemId = jQuery(this).attr('data-id');
+
+        jQuery.ajax({
+            url: "view.php",
+            data: {
+                id: itemId
+            },
+            dataType: 'json',
+            type: "POST",
+            success: function (result) {
+
+                if (result.error === false) {
+                    console.log(result);
+                    $(result.data).appendTo('body').modal();
+
+
+                }
+            }
+        });
+
+
+    })
+
 })
