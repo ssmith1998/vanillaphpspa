@@ -109,7 +109,8 @@ jQuery(document).ready(function () {
             success: function (result) {
 
                 if (result.error === false) {
-                    console.log(result);
+                    $('.userAddMessage').html(result.message)
+                    $('.userAddMessage').addClass('alert alert-success mt-3')
 
                 }
             }

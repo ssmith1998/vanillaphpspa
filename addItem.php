@@ -11,6 +11,9 @@ $stmt = $conn->prepare("INSERT INTO food (foodName, user_id) VALUES (?,?)");
 
 if ($stmt->execute([$foodItem, $user]) === true) {
 
+    $stmt = $conn->prepare("INSERT INTO activity (user_id, action) VALUES (?,?)");
+    $stmt->execute([$user, 'added Item']);
+
     $last_id = $conn->lastInsertId();
 
     $stmt = $conn->prepare("SELECT * FROM food WHERE id = ?");
