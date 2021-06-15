@@ -146,4 +146,24 @@ jQuery(document).ready(function () {
 
     })
 
+
+    jQuery('#tableLogs').DataTable({
+        ajax: 'logs.php',
+        dataSrc: 'data'
+
+
+    });
+
+    jQuery.ajax({
+        url: "./logs.php",
+        dataType: 'json',
+        type: "GET",
+        success: function (result) {
+            console.log(result);
+
+        }
+    });
+
+
+
 })

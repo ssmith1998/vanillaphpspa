@@ -24,7 +24,10 @@ $foodData = $stmt->fetchAll();
     <div class=" card p-5 w-75">
         <div class="cardTop d-flex justify-content-between align-items-center mb-4">
             <h3>Hello <?php echo $userData['username']; ?></h3>
-            <a href="#addNewItemModal" rel="modal:open"><button class="addNewBtn btn btn-primary mb-2">+</button></a>
+            <div class="actionBtns">
+                <a href="#showLogs" rel="modal:open"><button class="addNewBtn btn btn-primary mb-2">Show Logs</button></a>
+                <a href="#addNewItemModal" rel="modal:open"><button class="addNewBtn btn btn-primary mb-2">+</button></a>
+            </div>
         </div>
         <div class="listWrapper">
             <table id="mainTable" class="table">
@@ -77,10 +80,31 @@ $foodData = $stmt->fetchAll();
 </div>
 
 <!-- modal end -->
-<!-- modal edit -->
+
+<!-- modal show logs -->
+<div id="showLogs" class="modal modalBase">
+    <div class="wrapper d-flex align-items-center justify-content-center">
+        <div class="p-5 w-100">
+            <h3 class="text-center">Logs</h3>
+            <table class="table tableLogs w-100" id="tableLogs">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Action</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
 
 
-<!-- modal edit -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- modal end -->
 
 <?php
 
