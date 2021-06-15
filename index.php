@@ -1,7 +1,4 @@
 <?php
-
-use App\Auth\Register;
-
 require './connection.php';
 require './header.php';
 ?>
