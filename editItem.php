@@ -13,10 +13,10 @@ if ($stmt->execute([$item_id]) === true) {
     $modalData = '<div class="wrapper align-items-center justify-content-center modal modalBase">
     <div class="p-5 w-100">
         <h3 class="text-center">Edit Item</h3>
-        <form class="w-100" id="addNewFoodItemForm">
+        <form class="w-100" id="editItemForm">
             <div class="form-group">
-                <label for="newFoodName">Food Name</label>
-                <input type="email" class="form-control" value=' . $item['foodName'] . ' id="editedFoodName" aria-describedby="emailHelp" placeholder="Enter new food">
+                <label for="editedFoodName">Food Name</label>
+                <input  class="form-control" placeholder=' . $item['foodName'] . ' id="editedFoodName' . $item['id'] . '" aria-describedby="emailHelp">
             </div>
             <div class="form-group mt-3">
                 <button type="button" id="editFoodItem" data-id=' . $item['id'] . ' class="btn btn-success">Update Item</button>

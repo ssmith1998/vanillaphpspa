@@ -16,13 +16,25 @@ if ($stmt->execute([$foodItem, $user]) === true) {
 
     $last_id = $conn->lastInsertId();
 
-    $stmt = $conn->prepare("SELECT * FROM food WHERE id = ?");
-    $stmt->execute([$last_id]);
-    $insertedColumn = $stmt->fetch();
+    $stmt = $conn->prepare("SELECT * FROM food WHERE user_id = ?");
+    $stmt->execute([$user]);
+    $food = $stmt->fetchAll();
+
+    $newFood = [];
+    foreach ($food as $item) {
+        $newFood[] = [
+            'id' => $item['id'],
+            'foodName' => $item['foodName'],
+            'actions' => '<button class="btn btn-primary editItem" data-id=' . $item['id'] . '" modal-id="#addNewItemModal">Edit</button>
+            <button class="btn btn-danger deleteItem" data-id="' . $item['id'] . '">Delete</button>
+            <button class="btn btn-primary viewItem" data-id="' . $item['id'] . '">View</button>'
+        ];
+    }
+
     echo json_encode([
         'error' => false,
         'message' => 'Food created Succesfully!',
-        'data' => $insertedColumn
+        'data' => $newFood
     ]);
 } else {
     echo json_encode([

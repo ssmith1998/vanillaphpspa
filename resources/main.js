@@ -9,8 +9,7 @@ jQuery(document).ready(function () {
         jQuery('.' + data_tab).addClass('show');
     })
 
-    //data table 
-    $('#mainTable').DataTable();
+
 
     //add food
     jQuery('#addNewFoodItemBtn').on('click', function () {
@@ -28,6 +27,8 @@ jQuery(document).ready(function () {
 
                     $('.userAddMessage').html(result.message);
                     $('.userAddMessage').addClass('alert alert-success')
+                    var table = $('#mainTable').DataTable();
+                    table.clear().rows.add(result.data).draw();
                 } else {
                     $('.userAddMessage').innerHTML = result.message
                     $('.userAddMessage').addClass('alert alert-danger')
@@ -40,7 +41,7 @@ jQuery(document).ready(function () {
 
     //delete food
 
-    jQuery('.deleteItem').on('click', function () {
+    jQuery(document).on('click', '.deleteItem', function () {
         if (window.confirm('Are you sure you want to delete this item?') === true) {
             let itemId = jQuery(this).attr('data-id');
 
@@ -55,6 +56,8 @@ jQuery(document).ready(function () {
                     console.log(result)
                     if (result.error === false) {
                         console.log(result);
+                        var table = $('#mainTable').DataTable();
+                        table.clear().rows.add(result.data).draw();
                     } else {
 
                     }
@@ -66,7 +69,7 @@ jQuery(document).ready(function () {
 
 
     //edit item 
-    jQuery('.editItem').on('click', function () {
+    jQuery(document).on('click', '.editItem', function () {
 
         let itemId = jQuery(this).attr('data-id');
 
@@ -96,7 +99,9 @@ jQuery(document).ready(function () {
     jQuery(document).on('click', '#editFoodItem', function () {
 
         let itemId = jQuery(this).attr('data-id');
-        let newFoodName = jQuery('#editedFoodName').val()
+        let newFoodName = jQuery('#editedFoodName' + itemId).val();
+
+        console.log(itemId, newFoodName)
 
         jQuery.ajax({
             url: "updateitem.php",
@@ -109,8 +114,15 @@ jQuery(document).ready(function () {
             success: function (result) {
 
                 if (result.error === false) {
+                    console.log(result)
                     $('.userAddMessage').html(result.message)
                     $('.userAddMessage').addClass('alert alert-success mt-3')
+
+                    var table = $('#tableLogs').DataTable();
+                    table.clear().rows.add(result.data).draw();
+
+                    var table = $('#mainTable').DataTable();
+                    table.clear().rows.add(result.food).draw();
 
                 }
             }
@@ -120,7 +132,7 @@ jQuery(document).ready(function () {
     })
 
     //view item 
-    jQuery('.viewItem').on('click', function () {
+    jQuery(document).on('click', '.viewItem', function () {
 
 
         let itemId = jQuery(this).attr('data-id');
@@ -154,8 +166,28 @@ jQuery(document).ready(function () {
 
     });
 
+    jQuery('#mainTable').DataTable({
+        ajax: 'allFood.php',
+        dataSrc: 'data',
+        responsive: true,
+        columns: [{
+                data: 'id'
+            },
+            {
+                data: 'foodName'
+            },
+            {
+                data: 'actions'
+            },
+        ]
+
+
+
+    });
+
+
     jQuery.ajax({
-        url: "./logs.php",
+        url: "./allFood.php",
         dataType: 'json',
         type: "GET",
         success: function (result) {

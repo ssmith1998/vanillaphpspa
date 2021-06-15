@@ -13,13 +13,27 @@ if ($stmt->execute([$item_id]) === true) {
     $stmt = $conn->prepare("INSERT INTO activity (user_id, action) VALUES (?,?)");
     $stmt->execute([$user, 'deleted Item ' . $item_id]);
 
-    $stmt = $conn->prepare("SELECT * FROM food WHERE id = ?");
-    $stmt->execute([$item_id]);
-    $deletedColumn = $stmt->fetch();
+    $stmt = $conn->prepare("SELECT * FROM food WHERE user_id = ?");
+    $stmt->execute([$user]);
+    $food = $stmt->fetchAll();
+
+    $newFood = [];
+    foreach ($food as $item) {
+        $newFood[] = [
+            'id' => $item['id'],
+            'foodName' => $item['foodName'],
+            'actions' => '<button class="btn btn-primary editItem" data-id=' . $item['id'] . '" modal-id="#addNewItemModal">Edit</button>
+            <button class="btn btn-danger deleteItem" data-id="' . $item['id'] . '">Delete</button>
+            <button class="btn btn-primary viewItem" data-id="' . $item['id'] . '">View</button>'
+        ];
+    }
+
+
+
     echo json_encode([
         'error' => false,
         'message' => 'Food removed Succesfully!',
-        'data' => $deletedColumn
+        'data' => $newFood
     ]);
 } else {
 

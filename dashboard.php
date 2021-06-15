@@ -68,7 +68,7 @@ $foodData = $stmt->fetchAll();
             <form class="w-100" id="addNewFoodItemForm">
                 <div class="form-group">
                     <label for="newFoodName">Food Name</label>
-                    <input type="email" class="form-control" id="newFoodName" aria-describedby="emailHelp" placeholder="Enter new food">
+                    <input type="text" class="form-control" id="newFoodName" placeholder="Enter new food">
                 </div>
                 <div class="form-group mt-3">
                     <button type="button" id="addNewFoodItemBtn" class="btn btn-success">Save Item</button>
