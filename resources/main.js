@@ -1,13 +1,37 @@
 jQuery(document).ready(function () {
 
+    if (localStorage.getItem('data_tab')) {
+        let allTabsContent = document.querySelectorAll('.tab-c');
+        let allTabs = document.querySelectorAll('.tab');
+        let tabCurrent = localStorage.getItem('data_tab');
+
+        allTabsContent.forEach(tab => {
+            jQuery(tab).removeClass('show')
+        })
+
+        allTabs.forEach(tab => {
+            jQuery(tab).removeClass('active-tab')
+            if (jQuery(tab).attr('data-tab') === tabCurrent) {
+                jQuery(tab).addClass('active-tab')
+            }
+        })
+
+        jQuery('.' + tabCurrent).addClass('show');
+    }
+
+
+
     jQuery('.tab').on('click', function (e) {
         jQuery('.tab').removeClass('active-tab');
         jQuery(this).addClass('active-tab');
         let data_tab = jQuery(this).attr('data-tab');
         jQuery('.tab-c').removeClass('show');
         console.log(data_tab);
+        localStorage.setItem('data_tab', data_tab);
         jQuery('.' + data_tab).addClass('show');
     })
+
+
 
 
 

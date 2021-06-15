@@ -21,11 +21,13 @@ require './header.php';
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 </div>
 
-                <div class="btnWrapper text-center w-100">
-
+                <div class="btnWrapper text-center w-100 mt-3">
                     <button type="submit" class="btn btn-primary w-75">Login</button>
                 </div>
             </form>
+            <?php if (isset($_GET['loginError']) && $_GET['loginError'] === 'true') : ?>
+                <p class="alert alert-danger mt-3" role="alert">Your Credentials are invalid!</p>
+            <?php endif; ?>
         </div>
 
         <div class="registerTab bg-secondary card tab-c p-5 mt-5">
@@ -40,7 +42,7 @@ require './header.php';
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 </div>
-                <div class="btnWrapper text-center w-100">
+                <div class="btnWrapper text-center w-100 mt-3">
                     <button type="submit" class="btn btn-primary w-75">Register</button>
                 </div>
             </form>
