@@ -99,7 +99,7 @@ jQuery(document).ready(function () {
     jQuery(document).on('click', '#editFoodItem', function () {
 
         let itemId = jQuery(this).attr('data-id');
-        let newFoodName = jQuery('#editedFoodName' + itemId).val();
+        let newFoodName = document.getElementById('editedFoodName' + itemId).value;
 
         console.log(itemId, newFoodName)
 

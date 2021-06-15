@@ -16,7 +16,7 @@ if ($stmt->execute([$item_id]) === true) {
         <form class="w-100" id="editItemForm">
             <div class="form-group">
                 <label for="editedFoodName">Food Name</label>
-                <input  class="form-control" placeholder=' . $item['foodName'] . ' id="editedFoodName' . $item['id'] . '" aria-describedby="emailHelp">
+                <input  class="form-control" value=' . $item['foodName'] . ' id="editedFoodName' . $item['id'] . '" aria-describedby="emailHelp">
             </div>
             <div class="form-group mt-3">
                 <button type="button" id="editFoodItem" data-id=' . $item['id'] . ' class="btn btn-success">Update Item</button>
